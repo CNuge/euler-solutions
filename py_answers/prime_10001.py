@@ -31,6 +31,5 @@ def prime_ten_thousand_and_one():
 		number += 1
 		if is_prime(number) == True:
 			prime_count += 1		
-			print((number, prime_count))
 		
 	return (number, prime_count)
