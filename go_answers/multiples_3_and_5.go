@@ -1,18 +1,15 @@
 package main
 
-
-import(
+import (
 	"fmt"
 )
 
-
-
-func main(){
+func main() {
 	total := 0
 	max := 1000
 
-	for i := 0 ; i < max ; i++ {
-		if (i % 3 == 0) || (i % 5 == 0){
+	for i := 0; i < max; i++ {
+		if (i%3 == 0) || (i%5 == 0) {
 			total += i
 		}
 	}
