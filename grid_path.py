@@ -9,7 +9,7 @@ This one has a picture go look at it!
 
 How many such routes are there through a 20×20 grid?
 
-"""
+
 1 1 1
 1 2 3
 1 3 6
@@ -29,7 +29,7 @@ How many such routes are there through a 20×20 grid?
 # construct an empty matrix of 20 x 20
 
 # to arrive at the total for that cell
-
+"""
 
 def build_grid(size_tuple):
 	col = [0 for x in range(size_tuple[1])]
