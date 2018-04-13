@@ -32,8 +32,10 @@ How many such routes are there through a 20×20 grid?
 """
 
 def build_grid(size_tuple):
-	col = [0 for x in range(size_tuple[1])]
-	rows = [col for x in range(size_tuple[0])]
+	""" pesky bug here, need to make sure these were not referencing copies
+		of the same list, or else the final output is the final row repeated
+		over and over, each row is unique here """
+	rows = [[0 for x in range(size_tuple[1])] for x in range(size_tuple[0])]
 	return rows
 
 def fill_ones(grid):
@@ -60,9 +62,6 @@ def grid_path_num(size_tuple):
 
 	return grid[(size_tuple[0]-1)][(size_tuple[1]-1)]
 
-
-x = grid_path_num((21,21))
-x
 
 import numpy as np
 
