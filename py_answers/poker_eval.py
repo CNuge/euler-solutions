@@ -309,8 +309,6 @@ nil = 'KH 9H 6C 3H 2D'
 n = PokerHand(nil)
 n.components
 
-#nil is beating pairs!
-
 
 hands = [ sf, s, f, fh, q, t, tp, p, n]
 
