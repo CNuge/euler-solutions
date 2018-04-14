@@ -111,9 +111,17 @@ class PokerHand():
 					self.doubles,
 					self.face_vals)
 
+filename='poker.txt'
 
+def game(filename):
+	p1_wins = 0
+	p2_wins = 0
 
-
+	with open(filename) as file:
+		for line in file:
+			dat = line.rstrip()
+			p1 = PokerHand(dat[:14])
+			p2 = PokerHand(dat[15:])
 
 
 x = PokerHand('8C TS KC 9H 4S')
