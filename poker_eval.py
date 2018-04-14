@@ -81,7 +81,7 @@ class PokerHand():
 		self.quad = 0
 		self.triple = 0
 		self.doubles = []
-		for k,v in self.val_count.items():
+		for k, v in self.val_count.items():
 			if v == 4:
 				self.quad = k
 			if v == 3:
@@ -89,7 +89,6 @@ class PokerHand():
 			if v == 2:
 				self.doubles.append(k)
 		self.doubles = 	sorted(self.doubles)[::-1]
-
 
 	def score_hand(self):
 		self.is_straight()
@@ -133,7 +132,6 @@ def compare_hands(p1, p2):
 	if p1_dat[0] == 1 and p1_dat[1] == 1 and p2_dat[0] == 1 and p2_dat[1] == 1 :
 		return high_card(p1_dat[-1], p2_dat[-1])
 
-	# straight flush p1
 	elif  p1_dat[0] == 1 and p1_dat[1] == 1 :
 		return p1_win
 
@@ -185,6 +183,7 @@ def compare_hands(p1, p2):
 		return p2_win
 
 	#3 of a kind
+
 	elif p1_dat[3] > p2_dat[3]:
 		return p1_win
 	elif p1_dat[3] < p2_dat[3]:
@@ -208,6 +207,12 @@ def compare_hands(p1, p2):
 		elif p1_dat[4][0] < p2_dat[4][0]:
 			return p2_win
 	
+	elif len(p1_dat[4]) > 1:
+			return p1_win
+
+	elif len(p2_dat[4]) > 1:
+			return p2_win
+
 	#pairs
 	elif len(p1_dat[4]) == 1 and len(p2_dat[4]) == 1:
 		if p1_dat[4][0] == p2_dat[4][0]:
@@ -218,7 +223,13 @@ def compare_hands(p1, p2):
 		
 		elif p1_dat[4][0] < p2_dat[4][0]:
 			return p2_win
-		
+	
+	elif len(p1_dat[4]) == 1:
+		return p1_win
+
+	elif len(p2_dat[4]) == 1:
+		return p2_win
+
 	#high card
 	else:
 		return high_card(p1_dat[-1], p2_dat[-1])
@@ -244,12 +255,6 @@ def poker_game(filename):
 
 
 
-ex_hands = ['8C TS KC 9H 4S', '7D 2S 5D 3S AC', '5C AD 5D AC 9C' ,
-			'7C 5H 8D TD KS', '3H 7H 6S KC JS' ,'QH TD JC 2D 8S' ,
-			'QD AS 6H JS 2C' , '3D 9H KC 4H 8S', 'KD 8S 9S 7C 2S' ,
-			'3S 6D 6S 4H KC']
-
-
 filename='poker.txt'
 
 
@@ -258,7 +263,61 @@ poker_game(filename)
 
 
 
+"""
+Below is for testing:
+
+take a set of hands and a set of of matchups and 
+make sure that the components are properly identified and that the winners are
+properly identified
+
+"""
 
 
+straight_flush = 'AC KC QC JC TC'
+sf = PokerHand(straight_flush)
+sf.components
+
+straight = 'TC 7H 6H 9D 8S '
+s = PokerHand(straight)
+s.components
+
+flush = '2C 9C QC 7C TC'
+f = PokerHand(flush)
+f.components
+
+full_house = '9C 7C 9H 7S 9S'
+fh = PokerHand(full_house)
+fh.components
+
+quad = '5C 5H 5S 5D 9S'
+q = PokerHand(quad)
+q.components
+
+triple = '7H 9H 7C 2H 7D'
+t = PokerHand(triple)
+t.components
+
+two_pairs = '7H 9H 7C 2H 2D'
+tp = PokerHand(two_pairs)
+tp.components
+
+pair = '6H 9H 6C 3H 2D'
+p = PokerHand(pair)
+p.components
+
+nil = 'KH 9H 6C 3H 2D'
+n = PokerHand(nil)
+n.components
+
+#nil is beating pairs!
 
 
+hands = [ sf, s, f, fh, q, t, tp, p, n]
+
+for h1 in hands:
+	for h2 in hands:
+		if h1.components == h2.components:
+			continue
+
+		compare = compare_hands(h1, h2)
+		print(f'winner:{compare}\nh1:{h1.components}\th2:{h2.components}')
