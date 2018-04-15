@@ -5,4 +5,4 @@
 - As I pick new problems I make a file and place it in the TODO folder. 
 - Anything I'm currently working on will be in the main directory.
 
-![Solved Status](https://projecteuler.net/profile/CNuge.png)
+![https://projecteuler.net/profile/CNuge.png](https://projecteuler.net/profile/CNuge.png)
