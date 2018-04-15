@@ -18,24 +18,23 @@ package main
 
 import (
 	"fmt"
-	//"math/big"
-	"strconv"
+	"math/big"
 )
 
 
-func Factorial(number int) int {
-	output := number
+func Factorial(number int) big.Int {
+	output :=  big.NewInt(0)
 
-	for i := (number -1); i > 0; i++ {
-		output = output * i
-	}
-	return output
+	output.MulRange( int64(1), int64(number))
+
+	return *output
 }
 
-func DigitSum(number int) int{
+
+func BigDigitSum(number big.Int) int{
 	total := 0
 
-	for _, i := range strconv.Itoa(number){
+	for _, i := range number.String() {
 		temp := int(i - '0')
 		total += temp
 	}
@@ -44,22 +43,12 @@ func DigitSum(number int) int{
 
 
 func main(){
-	z := 12345
-	x := strconv.Itoa(z)
-	fmt.Println(x)
-
-
-	for _ , i := range x {
-		temp := int(i - '0')
-		//fmt.Printf("character %v\t number:%v\n", temp, strconv.ParseInt(temp) )
-		fmt.Printf("%v\n", temp)
-		fmt.Printf("%v\n", temp *2)
-	}
-
  
-	//fact_total := Factorial(100)
+	fact_total := Factorial(100)
+	fmt.Println(fact_total.String())
 
-	digit_total := DigitSum(15)
+	fact_digit_total := BigDigitSum(fact_total)
+	fmt.Println(fact_digit_total)
 
-	fmt.Println(digit_total)
+
 }
