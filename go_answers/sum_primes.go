@@ -14,22 +14,20 @@ import (
 	"fmt"
 )
 
-
 func is_prime(number int) bool {
 	if number < 4 {
 		return true
 	}
 	for x := 2; x < number/2+1; x++ {
-		if number % x == 0 {
+		if number%x == 0 {
 			return false
 		}
 	}
 	return true
 }
 
-
 func sum_primes(below int) int {
-	total := 2 
+	total := 2
 	// need to start with 2 accounted for, increment from 3 upwards
 	//increment by 2, no need to check even numbers
 	for i := 3; i < below; i = i + 2 {
@@ -41,6 +39,6 @@ func sum_primes(below int) int {
 	return total
 }
 
-func main(){
+func main() {
 	fmt.Println(sum_primes(2000000))
 }

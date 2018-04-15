@@ -9,12 +9,11 @@ https://projecteuler.net/problem=3
 
 package main
 
-import(
+import (
 	"fmt"
 	"math"
 	"sort"
 )
-
 
 func is_prime(number int) bool {
 	if number < 4 {
@@ -39,7 +38,7 @@ func max_prime_factor(number int) int {
 	prime_factors := []int{}
 	// stepping by 1, b/c the reciprocial may be a prime even if this is even!
 	for i := 3; i < int(ceiling); i++ {
-		if number % i == 0 {
+		if number%i == 0 {
 			// is the low factor prime?
 			if is_prime(i) {
 				prime_factors = append(prime_factors, i)
@@ -56,12 +55,8 @@ func max_prime_factor(number int) int {
 	return prime_factors[len(prime_factors)-1]
 }
 
-
-func main(){
+func main() {
 
 	fmt.Println(max_prime_factor(600851475143))
 
 }
-
-
-
