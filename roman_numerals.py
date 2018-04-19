@@ -94,29 +94,50 @@ def roman_to_numeric(numeral_string):
 	return value
 
 
-fourty_four = 'XLIV'
-thirty_seven = 'XXXVII'
-nineteen = 'XIX'
-nineteen_b = 'XIIIIIIIII'
-nineteen_c = 'XVIIII'
-twenty_sixteen = 'MMXVI'
-nineteen_sixty_six = 'MCMLXVI'
-
-roman_to_numeric(fourty_four)
-roman_to_numeric(thirty_seven)
-roman_to_numeric(nineteen)
-roman_to_numeric(nineteen_b)
-roman_to_numeric(nineteen_c)
-roman_to_numeric(twenty_sixteen)
-roman_to_numeric(nineteen_sixty_six)
-
-
 def minimal_roman(integer):
 	""" return a string that is the minimal representation of the number in
 		roman numeral form """
 
+	int_dict = {1 : 'I',
+				5 : 'V',
+				10 : 'X',
+				50 : 'L',
+				100 : 'C',
+				500 : 'D',
+				1000 : 'M'}
 
+	num_count = {k : 0 for k in int_dict.keys() }
 
+	for div in list(num_count.keys())[::-1]:
+		if div <= integer:
+			
+			count = integer // div
+			
+			num_count[div] = count
+
+			integer = integer % div
+
+	num_string = ''
+
+	for num, count in num_count.items():
+
+		#should only see a 4 for base 10
+		if count == 4 and num < 1000:
+			
+			if num_count[(num * 5)] == 1:
+				addition = f'{int_dict[num]}{int_dict[(num * 10)]}'
+				num_count[(num * 5)] = 0
+
+			else:
+				addition = f'{int_dict[num]}{int_dict[(num * 5)]}'
+
+			num_string = addition + num_string
+
+		else:
+			addition = [int_dict[num] for n in range(0, count)]
+			num_string =  ''.join(addition)  + num_string
+
+	return num_string
 
 
 
@@ -132,10 +153,52 @@ if __name__ == '__main__':
 
 			value = roman_to_numeric(given_numeral)
 
-			minimal_form = minimal_roman(roman)
+			minimal_form = minimal_roman(value)
 
 			size_dif = len(given_numeral) - len(minimal_form)
 
 			char_saved += size_dif
 
 	print(f'minimal encoding of the numbers would save: {char_saved} characters.\n')
+
+
+
+
+"""
+	fourty_four = 'XLIV'
+	thirty_seven = 'XXXVII'
+	nineteen = 'XIX'
+	nineteen_b = 'XIIIIIIIII'
+	nineteen_c = 'XVIIII'
+	twenty_sixteen = 'MMXVI'
+	nineteen_sixty_six = 'MCMLXVI'
+
+	roman_to_numeric(fourty_four)
+	roman_to_numeric(thirty_seven)
+	roman_to_numeric(nineteen)
+	roman_to_numeric(nineteen_b)
+	roman_to_numeric(nineteen_c)
+	roman_to_numeric(twenty_sixteen)
+	roman_to_numeric(nineteen_sixty_six)
+
+
+	#problem -  the current if clause correctly identifies the 'next up' reduction
+	# need to identify the two up reductions as well. i.e. 9s
+	minimal_roman(9)
+
+
+	minimal_roman(1)
+	minimal_roman(4)
+	minimal_roman(19)
+	minimal_roman(40)
+	minimal_roman(41)
+	minimal_roman(100)
+	minimal_roman(1966)
+	minimal_roman(2019)
+	minimal_roman(1738)
+
+"""
+
+
+
+
