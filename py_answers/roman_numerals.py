@@ -34,38 +34,6 @@ https://projecteuler.net/about=roman_numerals
 
 https://projecteuler.net/problem=89
 
-Only one I, X, and C can be used as the leading numeral in part of a subtractive pair.
-I can only be placed before V and X.
-X can only be placed before L and C.
-C can only be placed before D and M.
-
-#Examples:
-MMMMDCLXXII
-MMDCCCLXXXIII
-MMMDLXVIIII
-MMMMDXCV
-DCCCLXXII
-MMCCCVI
-MMMCDLXXXVII
-MMMMCCXXI
-MMMCCXX
-MMMMDCCCLXXIII
-MMMCCXXXVII
-MMCCCLXXXXIX
-MDCCCXXIIII
-
-
-# goal - find the number of characters saved by writing a number in its minimal form.
-# need to calculate:
-	#1. the number's value
-	#2. the minimal form of that number
-	#3. the character difference between the two (length of the strings)
-
-
-Trick for parsing roman numerals:
-- go right to left, this way we can keep track of the biggest numeral seen
-then if a following value is smaller, we know to subtract it instead of adding it!
-
 """
 
 
@@ -165,6 +133,39 @@ if __name__ == '__main__':
 
 
 """
+Only one I, X, and C can be used as the leading numeral in part of a subtractive pair.
+I can only be placed before V and X.
+X can only be placed before L and C.
+C can only be placed before D and M.
+
+#Examples:
+MMMMDCLXXII
+MMDCCCLXXXIII
+MMMDLXVIIII
+MMMMDXCV
+DCCCLXXII
+MMCCCVI
+MMMCDLXXXVII
+MMMMCCXXI
+MMMCCXX
+MMMMDCCCLXXIII
+MMMCCXXXVII
+MMCCCLXXXXIX
+MDCCCXXIIII
+
+
+# goal - find the number of characters saved by writing a number in its minimal form.
+# need to calculate:
+	#1. the number's value
+	#2. the minimal form of that number
+	#3. the character difference between the two (length of the strings)
+
+
+Trick for parsing roman numerals:
+- go right to left, this way we can keep track of the biggest numeral seen
+then if a following value is smaller, we know to subtract it instead of adding it!
+
+Tests:
 	fourty_four = 'XLIV'
 	thirty_seven = 'XXXVII'
 	nineteen = 'XIX'
