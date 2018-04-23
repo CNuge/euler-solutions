@@ -30,6 +30,8 @@ https://projecteuler.net/problem=27
 def is_prime(number):
 	""" take a number and return a boolean indicating
 		if the number is prime or not """
+	if number < 0:
+		return False
 	if number < 4:
 		return True
 	#start with number 2, iterate up until up to half the number is reached
@@ -53,8 +55,8 @@ def prime_string(a,b):
 if __name__ == '__main__':
 	max_list = (0, 0, 0)
 
-	for a in range(-999, 1001):
-		for b in range(-999, 1001):
+	for a in range(-1000, 1001):
+		for b in range(-1000, 1001):
 			len_of_pattern = prime_string(a,b)
 			if len_of_pattern > max_list[0]:
 				max_list = (len_of_pattern, a, b)
