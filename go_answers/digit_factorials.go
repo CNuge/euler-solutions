@@ -24,23 +24,22 @@ func Factorial(number int) big.Int {
 	return *output
 }
 
-
 func DigitFactorials(number big.Int) big.Int {
 	dig_total := big.NewInt(0)
 
 	for _, dig := range number.String() {
 		temp := int(dig - '0')
 		fact_val := Factorial(temp)
-		dig_total.Add(dig_total , &fact_val)
+		dig_total.Add(dig_total, &fact_val)
 	}
 	return *dig_total
 }
 
-func main(){
+func main() {
 
 	sum_dig_factorials := 0
 
-	for i := 10 ; i < 362880 ; i ++ {
+	for i := 10; i < 362880; i++ {
 		number := big.NewInt(int64(i))
 		sum_factorials := DigitFactorials(*number)
 
