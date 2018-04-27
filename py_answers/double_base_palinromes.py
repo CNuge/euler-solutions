@@ -19,7 +19,6 @@ def is_palindrome(input):
 
 def bin_string(number):
 	""" take a number and return a string representation of its binary value """
-
 	return bin(number)[2:]
 
 
