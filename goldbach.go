@@ -1,4 +1,6 @@
-It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.
+/*
+It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a 
+prime and twice a square.
 
 9 = 7 + 2×1^2
 15 = 7 + 2×2^2
@@ -13,3 +15,5 @@ What is the smallest odd composite that cannot be written as the sum of a prime 
 
 
 https://projecteuler.net/problem=46
+
+*/
