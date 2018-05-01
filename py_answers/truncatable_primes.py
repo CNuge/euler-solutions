@@ -49,7 +49,6 @@ def truncate_left(number):
 
 
 
-
 if __name__ == '__main__':
 
 	truncate_right(3797)
@@ -68,6 +67,8 @@ if __name__ == '__main__':
 				trunc_found += 1
 				print(number)
 		number =  number + 2
+		print(number)
+
 
 	print(f'The search found {trunc_found} both sided truncatable primes')
 	print(f'Their total is: {trunc_total}')
