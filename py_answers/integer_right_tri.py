@@ -23,8 +23,8 @@ def count_triangles(perimeter):
 	print(perimeter)
 	right_tri_count = 0
 
-	for a in range(0, perimeter/2):
-		for b in range(0, perimeter/2):
+	for a in range(0, int(perimeter/2)):
+		for b in range(0, int(perimeter/2)):
 			c = perimeter - a - b
 			if c > a and c > b:
 				if is_right_tri(a,b,c) == True:
