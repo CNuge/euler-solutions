@@ -32,8 +32,16 @@ def eq_distance(list_of_numbers):
 		int the list that have equal differences """
 
 	#return the list of three numbers if they exist, return False otherwise
+	for i in list_of_numbers:
+		for j in list_of_numbers:
+			if j > i:
+				diff = j - i
+				if (j + diff) in list_of_numbers:
+					return (i,j,j+diff)
+				elif (i - diff) in list_of_numbers:
+					return (i-diff, i , j)
+	return False
 
-#iterate through numbers
 def find_eq_prime_perms(prime_list):
 	for x in range(1000, 10000):
 		#get the permutations
@@ -43,8 +51,8 @@ def find_eq_prime_perms(prime_list):
 
 		gap_check = eq_distance(prime_perms)
 		if gap_check != False :
-			return gap_check
-
+			if 1487 not in gap_check:
+				return gap_check
 	return False
 
 if __name__ == '__main__':
@@ -56,4 +64,4 @@ if __name__ == '__main__':
 
 	numbers = find_eq_prime_perms(prime_list)
 
-	print(''.join(numbers))
+	print(''.join([str(x) for x in numbers]))
