@@ -17,8 +17,14 @@ Find the Matrix Sum of:
 
 https://projecteuler.net/problem=345
 """
+test_run = ['7  53 183 439 863',
+			'497 383 563  79 973',
+			'287  63 343 169 583',
+			'627 343 773 959 943',
+			'767 473 103 699 303',]
 
-matrix=['  7  53 183 439 863 497 383 563  79 973 287  63 343 169 583',
+
+raw=['  7  53 183 439 863 497 383 563  79 973 287  63 343 169 583',
 		'627 343 773 959 943 767 473 103 699 303 957 703 583 639 913',
 		'447 283 463  29  23 487 463 993 119 883 327 493 423 159 743',
 		'217 623   3 399 853 407 103 983  89 463 290 516 212 462 350',
@@ -36,8 +42,66 @@ matrix=['  7  53 183 439 863 497 383 563  79 973 287  63 343 169 583',
 
 
 
+def sum_optimal_set(matrix):
 
+	values = []
+	row_totals = {i : 0 for i in range(0,len(matrix))}
+	col_totals = {i : 0 for i in range(0,len(matrix[0]))}
+
+	#total the values of each row and column for denominatiors
+	for i, row in enumerate(matrix):
+		for j, col in enumerate(row):
+			value = matrix[i][j]
+			row_totals[i]+= value
+			col_totals[j]+= value
+
+	# get the %of each row and column that a number composes
+	# create a tuple so we can choose from top to bottom by order of importance
+	for i, row in enumerate(matrix):
+		for j, col in enumerate(row):
+			value = matrix[i][j]
+
+			perc_value = (value/row_totals[i]) * (value/col_totals[j])
+
+			value_tup = (perc_value , i, j , value)
+			values.append(value_tup)
+	
+	#sort high to low on the first member of the tuples
+	values = sorted(values, key= lambda x: x[0])[::-1]
+
+	total = 0
+	used_i = []
+	used_j = []
+
+	for cell in values:
+		if cell[1] not in used_i:
+			if cell[2] not in used_j:
+				total += cell[3]
+				used_i.append(cell[1])
+				used_j.append(cell[2])
+
+	cells_used = sorted(list(zip(used_i, used_j)), key = lambda x: x[0])
+
+	return total, cells_used
 
 
 
 if __name__ == '__main__':
+
+	test_matrix = [[int(y) for y in x.split()] for x in test_run]
+
+	matrix = [[int(y) for y in x.split()] for x in raw]
+
+	print('test:')
+	val , components = sum_optimal_set(test_matrix)
+	print(components)
+	print(val)
+
+	print('experiment:')
+	val , components = sum_optimal_set(matrix)
+	print(components)
+	print(val)
+
+
+
+
