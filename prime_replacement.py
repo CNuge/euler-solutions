@@ -1,3 +1,4 @@
+"""
 By replacing the 1st digit of the 2-digit number *3, 
 it turns out that six of the nine possible values: 
 13, 23, 43, 53, 73, and 83, are all prime.
@@ -12,3 +13,4 @@ Find the smallest prime which, by replacing part of the number (not necessarily 
  with the same digit, is part of an eight prime value family.
 
 https://projecteuler.net/problem=51
+"""
