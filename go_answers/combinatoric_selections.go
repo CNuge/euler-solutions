@@ -12,7 +12,7 @@ r!(n−r)!
 ,where r ≤ n, n! = n×(n−1)×...×3×2×1, and 0! = 1.
 It is not until n = 23, that a value exceeds one-million: 23C10 = 1144066.
 
-How many, not necessarily distinct, values of  
+How many, not necessarily distinct, values of
 
 nCr, for 1 ≤ n ≤ 100, are greater than one-million?
 
@@ -27,7 +27,6 @@ import (
 	"math/big"
 )
 
-
 func Factorial(number int) big.Int {
 	output := big.NewInt(0)
 
@@ -36,31 +35,29 @@ func Factorial(number int) big.Int {
 	return *output
 }
 
-func Combinatorial(n int, c int) big.Int{
+func Combinatorial(n int, c int) big.Int {
 	// Factorial(n)  / Factorial(r) * Factorial(n-r)
-	numerator := Factorial(n) 
+	numerator := Factorial(n)
 
-	denom_a :=  Factorial(c)
-	denom_b := Factorial(n-c)
+	denom_a := Factorial(c)
+	denom_b := Factorial(n - c)
 
 	denom := big.NewInt(0)
-	denom.Mul(&denom_a,&denom_b)
-
+	denom.Mul(&denom_a, &denom_b)
 
 	n_choose_c := big.NewInt(0)
 
-	n_choose_c.Div(&numerator,denom)  
-	
+	n_choose_c.Div(&numerator, denom)
+
 	return *n_choose_c
 }
 
-
-func main(){
+func main() {
 
 	above_one_million := 0
 
-	for n := 1 ; n <= 100; n ++ {
-		for c := 1 ; c <= n ; c++{
+	for n := 1; n <= 100; n++ {
+		for c := 1; c <= n; c++ {
 			combinations := Combinatorial(n, c)
 			if combinations.Cmp(big.NewInt(1000000)) == 1 {
 				above_one_million += 1
@@ -69,4 +66,3 @@ func main(){
 	}
 	fmt.Println(above_one_million)
 }
-

@@ -11,18 +11,16 @@ Find the next triangle number that is also pentagonal and hexagonal.
 https://projecteuler.net/problem=45
 */
 
-
 package main
 
-import(
+import (
 	"fmt"
 	"math"
 )
 
+func IsTri(number int) bool {
+	val := (math.Sqrt(float64((8*number)+1)) - 1) / 2
 
-func IsTri(number int) bool{
-	val := (math.Sqrt(float64((8*number)+1)) -1)/2
-	
 	if float64(int(val)) == val {
 		return true
 	}
@@ -30,11 +28,9 @@ func IsTri(number int) bool{
 	return false
 }
 
+func IsPent(number int) bool {
+	val := (math.Sqrt(float64((24*number)+1)) + 1) / 6
 
-
-func IsPent(number int) bool{
-	val := (math.Sqrt(float64((24*number)+1)) +1)/6
-	
 	if float64(int(val)) == val {
 		return true
 	}
@@ -42,8 +38,8 @@ func IsPent(number int) bool{
 	return false
 }
 
-func IsHex(number int) bool{
-	val := (math.Sqrt(float64((8*number)+1))+1)/4
+func IsHex(number int) bool {
+	val := (math.Sqrt(float64((8*number)+1)) + 1) / 4
 
 	if float64(int(val)) == val {
 		return true
@@ -53,10 +49,10 @@ func IsHex(number int) bool{
 }
 
 func FindTriPenHex(start int) int {
-	for i := start ; ; i++ {
+	for i := start; ; i++ {
 		if IsTri(i) {
-			if IsPent(i){
-				if IsHex(i){
+			if IsPent(i) {
+				if IsHex(i) {
 					return i
 				}
 			}
@@ -64,8 +60,7 @@ func FindTriPenHex(start int) int {
 	}
 }
 
-
-func main(){
+func main() {
 
 	fmt.Println(IsTri(10))
 	fmt.Println(IsTri(11))
