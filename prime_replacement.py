@@ -71,13 +71,11 @@ replacement_scan(56773, 7)
 ans = 0
 for i in range(56773, 1000000, 2):
 	if is_prime(i):
-		print(i)
 		output = replacement_scan(i, 8)
 		if output[0] == True:
 			print(output[1])
 			ans = output[1][0]
 			break
-
 print(ans)
 
 
