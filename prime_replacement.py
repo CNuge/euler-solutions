@@ -14,7 +14,8 @@ with the same digit, is part of an eight prime value family.
 
 https://projecteuler.net/problem=51
 """
-
+from sympy import sieve
+from sympy.ntheory.primetest import isprime
 from itertools import permutations
 
 def is_prime(number):
@@ -30,17 +31,6 @@ def is_prime(number):
 			return False
 	return True
 
-def list_primes(length):
-	number = 1
-	prime_list = []
-
-	while len(prime_list) < length:
-		number += 1
-		if is_prime(number) == True:
-			prime_list.append(number)
-
-	return prime_list	
-
 def number_replacement(combo, digit_dict, prime_set):
     prime_list = []
     not_prime = 0
@@ -52,7 +42,7 @@ def number_replacement(combo, digit_dict, prime_set):
     		test_dict[pos] = digit
 		new_dig = int(''.join([str(x) for x in test_dict.values()]))
 		
-		if is_prime(new_dig):
+		if isprime(new_dig):
 			prime_list.append(new_dig)
 		else:
 			not_prime += 1
@@ -83,19 +73,18 @@ def replacement_scan(number, prime_set):
 
 
 
-
 if __name__ == '__main__':
 
-replacement_scan(13, 6)
 
-replacement_scan(56003, 7)
+prime_list = list(sieve.primerange(1, 10**6))
+
+
+replacement_scan(56003, 7 )
 replacement_scan(56773, 7)
 
+
 ans = 0
-
-prime_list = list_primes(50000)
-
-for i in prime_list[10000:]:
+for i in prime_list:
 	output = replacement_scan(i, 8)
 	if output[0] == True:
 		print(output[1])
@@ -107,6 +96,52 @@ print(ans)
 
 
 """
+#current
+
+def number_replacement(combo, digit_dict, prime_set, all_primes):
+    prime_list = []
+    not_prime = 0
+
+    for digit in range(0,10):
+    	
+    	test_dict = dict(digit_dict)
+    	for pos in combo:
+    		test_dict[pos] = digit
+		new_dig = int(''.join([str(x) for x in test_dict.values()]))
+		
+		if new_dig in all_primes:
+			prime_list.append(new_dig)
+		else:
+			not_prime += 1
+			if not_prime > (10 - prime_set):
+				return []
+	return prime_list
+
+
+def replacement_scan(number, prime_set, all_primes):
+	# replace components of the number, to check for prime permutations
+	digit_dict = {k: int(v) for k, v in enumerate(str(number))}
+
+	combos = []
+	for n in range(2, len(digit_dict.keys())+1):
+    	for perm in permutations(digit_dict.keys(), n):
+    		if sorted(perm) not in combos and sorted(perm)[0] != 0:
+	    		combos.append(sorted(perm))
+
+	for combo in combos:
+		prime_list = number_replacement(combo, digit_dict, prime_set, all_primes)
+		
+	    out_list = list(set(prime_list))
+		
+		#below we use set, because the scan will record the initial number t
+		if len(prime_list) == prime_set:
+			return True, sorted(prime_list)
+	return False, []
+
+
+
+
+
 def replacement_scan_two_spots(number, prime_set):
 	#iteratively replace digits in a number and find a prime set equal to the length of the query 
 	num_string = str(number)
@@ -160,6 +195,19 @@ def replacement_scan(number, prime_set):
 		if len(prime_list)== prime_set:
 			return True, sorted(prime_list)
 	return False, 0
+
+
+
+def list_primes(length):
+	number = 1
+	prime_list = []
+
+	while len(prime_list) < length:
+		number += 1
+		if is_prime(number) == True:
+			prime_list.append(number)
+
+	return prime_list	
 
 """
 
