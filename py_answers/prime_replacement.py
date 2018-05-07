@@ -1,4 +1,5 @@
 """
+
 By replacing the 1st digit of the 2-digit number *3, 
 it turns out that six of the nine possible values: 
 13, 23, 43, 53, 73, and 83, are all prime.
@@ -13,23 +14,11 @@ Find the smallest prime which, by replacing part of the number (not necessarily 
 with the same digit, is part of an eight prime value family.
 
 https://projecteuler.net/problem=51
+
 """
 from sympy import sieve
 from sympy.ntheory.primetest import isprime
 from itertools import permutations
-
-def is_prime(number):
-	""" take a number and return a boolean indicating
-		if the number is prime or not """
-	if number < 0:
-		return False
-	if number < 4:
-		return True
-	#start with number 2, iterate up until up to half the number is reached
-	for x in range(2, int(number/2)+1):
-		if number%x == 0:
-			return False
-	return True
 
 def number_replacement(combo, digit_dict, prime_set):
     prime_list = []
