@@ -1,3 +1,4 @@
+"""
 Each character on a computer is assigned a unique code and the preferred standard 
 is ASCII (American Standard Code for Information Interchange). For example, 
 uppercase A = 65, asterisk (*) = 42, and lowercase k = 107.
@@ -31,3 +32,66 @@ curl https://projecteuler.net/project/resources/p059_cipher.txt > p059_cipher.tx
 
 
 https://projecteuler.net/problem=59
+"""
+import itertools
+
+def iterate_ciphers(data):
+	#the encodings for all the lower case letters
+	cipher_components = [ ord(x) for x in 'abcdefghijklmnopqrstuvwxyz' ]
+
+	potential_messages = []
+	for c1 in cipher_components:
+		for c2 in cipher_components:
+			for c3 in cipher_components:
+				cipher = [c1,c2,c3]
+
+				pre_message = zip(data, itertools.cycle(cipher))
+
+				message_num = [ x[0] ^ x[1] for x in pre_message ]
+
+				message = ''.join([chr(x) for x in message_num])
+
+				count_the = message.count('the')
+				count_with = message.count('with')
+				count_for = message.count('for')
+				count_and = message.count('and')
+
+				total = count_the + count_with + count_for + count_and
+
+				if total > 10:
+					potential_messages.append(message)
+	return potential_messages
+
+if __name__ == '__main__':
+	x = 'A'
+	ord(x)
+	ord('*')
+	ord('k')
+
+
+	65 ^ 42 #to get the xor use the ^ symbol
+
+	file = open('p059_cipher.txt','r')
+	data = file.read()
+	file.close()
+
+	data = [int(x) for x in data.rstrip().split(',')]
+
+	potential_messages = iterate_ciphers(data)
+
+	len(potential_messages)
+
+	for x in potential_messages:
+		print(x)
+		print('\n\n\n\n')
+
+	message =  potential_messages[1]
+	message
+
+	#find the sum of the ASCII values in the original text.
+
+	sum_ascii = 0
+	for i in message:
+		sum_ascii += ord(i)
+
+	print(f'The message ascii values summed to: {sum_ascii}')
