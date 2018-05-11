@@ -68,7 +68,6 @@ if __name__ == '__main__':
 	ord('*')
 	ord('k')
 
-
 	65 ^ 42 #to get the xor use the ^ symbol
 
 	file = open('p059_cipher.txt','r')
