@@ -44,9 +44,8 @@ sum_dig_sq(44)
 total_89_end = 0
 
 for num in range(1,10000000):
-	
 	_ , eighty_nine_end = rep_add_sq(num)
-
-	total_89_end += eighty_nine_end
+	if eighty_nine_end == 1:
+		total_89_end += eighty_nine_end
 
 print(total_89_end)
