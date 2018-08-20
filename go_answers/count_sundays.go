@@ -31,7 +31,9 @@ type DateTime struct{
 	year		int
 }
 
-
+func (dt DateTime)String() string{
+	return fmt.Sprintf("%v\t%v\t%v", dt.day, dt.month, dt.year)
+}
 
 func count_sundays(dt DateTime, finish_year int) int {
 	var month_map = map[int]int{
@@ -50,37 +52,54 @@ func count_sundays(dt DateTime, finish_year int) int {
 
 	total_sundays := 0 
 
-	for ; ; dt['year'] < finish_year + 1{
+	for ;  dt.year < finish_year + 1 ;{
+		fmt.Println(dt)
 		// check if the day is a sunday
-		if dt['day_of_week'] == 7{
+		if dt.day_of_week == 7 {
 			// check if its the first of the month
-			if dt['day'] == 1 {
+			if dt.day == 1 {
 				total_sundays += 1
 			}
 			// reset day of week
-			dt['day_of_week'] = 1
+			dt.day_of_week = 1
 		}else{
 			//incrementing day of wee
-			dt['day_of_week'] += 1
+			dt.day_of_week += 1
 		}
 		// check if we need to roll over the month or the year, act accordingly
-		if dt['day'] == month_map[dt['month']]{
+		if dt.day >= month_map[dt.month]{
 			// leap year fringe case
-			if (dt['month'] == 2) && (dt['year'] % 4 == 0){
+			if (dt.month == 2) && (dt.year % 4 == 0){
 				// make sure its not a year divisible by 400
+				yr_str := fmt.Sprintf("%v", dt.year)
+				fmt.Println(yr_str[len(yr_str)-2:])
+				if (yr_str[(len(yr_str)-2):] != "00") || ((yr_str[(len(yr_str)-2):] == "00") && (dt.year % 400 == 0)){
+					dt.day += 1
+				} else{
+					dt.day = 1
+					dt.month += 1
+				}
+			} else if dt.month == 12 {
+				dt.day = 1
+				dt.month = 1
+				dt.year += 1
+			} else {
+				dt.day = 1
+				dt.month += 1
 			}
-
+		} else {
+			dt.day += 1
 		}
 	}
-
+	return total_sundays
 }
 
 
 
 func main(){
 
-	start_date = DateTime{
-		day_of_week: 1,
+	start_date := DateTime{
+		day_of_week: 2,
 		day:		1,
 		month:	 	1,
 		year:		1901,
