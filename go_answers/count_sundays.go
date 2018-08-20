@@ -65,7 +65,7 @@ func count_sundays(dt DateTime, finish_year int) int {
 			dt.day_of_week += 1
 		}
 		// check if we need to roll over the month or the year, act accordingly
-		if dt.day >= month_map[dt.month] {
+		if dt.day == month_map[dt.month] {
 			// leap year fringe case
 			if (dt.month == 2) && (dt.year%4 == 0) {
 				// make sure its not a year divisible by 400
@@ -85,6 +85,9 @@ func count_sundays(dt DateTime, finish_year int) int {
 				dt.day = 1
 				dt.month += 1
 			}
+		} else if dt.day > month_map[dt.month] {
+			dt.day = 1
+			dt.month += 1
 		} else {
 			dt.day += 1
 		}
