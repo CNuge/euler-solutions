@@ -41,6 +41,33 @@ def five_cube_perm(cube_list):
 		if count_perms == 5:
 			return x
 
+
+def split_cube_list(cube_list):
+	""" take the cube list and split it by length """
+	l_of_l = []
+	
+	str_cube_list = [ str(x) for x in cube_list]
+	for i in range(len(str_cube_list[-1])):
+		l = [x for x in str_cube_list if len(x) == i]
+		l_of_l.append([int(x) for x in l])
+
+	return l_of_l
+
+
+def search_cube_list(list_of_cubes):
+	for x in list_of_cubes:
+		print(x)
+		str_x = str(x)
+		count_perms = 0
+		for i in permutations(str_x):
+			number = int(''.join(i))
+			if number in list_of_cubes:
+				count_perms += 1
+		if count_perms == 5:
+			return x
+	return False
+
+
 if __name__ == '__main__':
 
 
@@ -52,3 +79,14 @@ cube_list = list_of_cubes(10000)
 
 answer = five_cube_perm(cube_list)
 print(answer)
+
+l_of_cube_sizes = split_cube_list(cube_list)
+
+for x in l_of_cube_sizes:
+	ans = search_cube_list(x)
+	if ans != False:
+		print(ans)
+
+
+
+
