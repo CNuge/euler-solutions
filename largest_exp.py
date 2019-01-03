@@ -28,10 +28,12 @@ def get_top_val(exp_data):
 
 	for pos, pair in enumerate(exp_data):
 
-		#nned to look up how to use these to compare large primes
+		#need to look up how to use these to compare large primes
 		pow_val = pow(pair[0], pair[1], mod)
 
 
+# or possibly need to use exponen by squaring
+# https://en.wikipedia.org/wiki/Exponentiation_by_squaring
 
 
 
