@@ -13,7 +13,7 @@ def read_data(infile):
 	data = []
 	with open(infile) as file:
 		for line in file:
-			x = line.rstrip().split(',')
+			x = line.split(',')
 			base = int(x[0])
 			exp = int(x[1])
 			data.append((base,exp))
@@ -35,7 +35,8 @@ def get_top_val(exp_data):
 # or possibly need to use exponen by squaring
 # https://en.wikipedia.org/wiki/Exponentiation_by_squaring
 
-
+#think this is the trick:
+#log(x**y) = y * log(x)
 
 
 """
