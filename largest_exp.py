@@ -29,7 +29,13 @@ def get_top_val(exp_data):
 	for pos, pair in enumerate(exp_data):
 
 		#need to look up how to use these to compare large primes
-		pow_val = pow(pair[0], pair[1], mod)
+		log_pow_val = pair[1] * np.log(pair[0])
+
+		if log_pow_val > top_val:
+			top_pos = pos
+			top_val = log_pow_val
+			
+	return (top_pos, top_val)
 
 
 # or possibly need to use exponen by squaring
@@ -53,6 +59,9 @@ if __name__ == '__main__':
 	#read in the data
 	data = read_data('base_exp.txt')
 
+	ans = get_top_val(data)
+
+	print(ans[0])
 
 
 
